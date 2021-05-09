@@ -4,20 +4,20 @@ import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'login_bloc.dart';
-import 'login_module.dart';
+import 'person_bloc.dart';
+import 'person_module.dart';
 
-class LoginPage extends StatefulWidget {
+class PersonPage extends StatefulWidget {
   final String title;
 
-  const LoginPage({Key key, this.title = "Joao"}) : super(key: key);
+  const PersonPage({Key key, this.title = "Joao"}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _PersonPageState createState() => _PersonPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  LoginBloc _loginBloc = LoginModule.to.getBloc<LoginBloc>();
+class _PersonPageState extends State<PersonPage> {
+  PersonBloc _loginBloc = PersonModule.to.getBloc<PersonBloc>();
 
   String username;
 
@@ -38,15 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextInputWidget(
-              "Username",
-              callback: (String name) => {username = name},
-            ),
-            Padding(padding: EdgeInsets.only(bottom: 10)),
-            SubmitWidget(
-              () => _loginBloc.login(context, username),
-              text: "Login",
-            ),
+            Text("teste person"),
           ],
         ),
       ),

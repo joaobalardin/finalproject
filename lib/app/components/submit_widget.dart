@@ -21,19 +21,12 @@ class SubmitWidget extends StatelessWidget {
           Expanded(
             child: RaisedButton(
               color: Theme.of(context).primaryColor,
-              textColor: Theme.of(context).primaryColor,
+              textColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(100),
               ),
               onPressed: () {
-                if (_validate == null || _validate()) {
-                  final pr = ProgressDialog(context,
-                      showLogs: true, isDismissible: false);
-                  pr.show().then((value) {
-                    _execute();
-                    pr.hide();
-                  });
-                }
+                _execute();
               },
               child: Text(text ?? "Enviar"),
             ),

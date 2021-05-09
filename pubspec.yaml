@@ -14,6 +14,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   bloc_pattern:
   progress_dialog:
+  firebase_core: "^0.7.0"
+  cloud_firestore: "^0.16.0+1"
 
 dev_dependencies:
   flutter_test:
