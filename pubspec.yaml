@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   bloc_pattern:
+  progress_dialog:
 
 dev_dependencies:
   flutter_test:
