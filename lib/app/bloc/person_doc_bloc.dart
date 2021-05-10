@@ -8,13 +8,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PersonDocBloc extends BlocBase {
-  CollectionReference persondoc = FirebaseFirestore.instance.collection('personDocs');
+  CollectionReference firebaseRef = FirebaseFirestore.instance.collection('personDocs');
 
   LoggedUser loggedUser = new LoggedUser();
 
   Future<List<PersonDoc>> findAll() async {
     log(loggedUser.user.id);
-    QuerySnapshot snapshot = await persondoc.where("userId", isEqualTo: loggedUser.user.id).get();
+    QuerySnapshot snapshot = await firebaseRef.where("userId", isEqualTo: loggedUser.user.id).get();
     List <PersonDoc> personDocs = [];
     snapshot.docs.forEach((element) {
       Map<String, dynamic> map = element.data();
@@ -22,5 +22,13 @@ class PersonDocBloc extends BlocBase {
       personDocs.add(personDoc);
     });
     return personDocs;
+  }
+
+  Future<void> create(PersonDoc personDoc) async {
+    await firebaseRef.add(personDoc.toMap());
+  }
+
+  Future<void> update(PersonDoc personDoc) async {
+    await firebaseRef.doc(personDoc.id).update(personDoc.toMap());
   }
 }

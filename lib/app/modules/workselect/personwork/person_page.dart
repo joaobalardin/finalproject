@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
 import 'package:finalproject/app/model/personDoc.dart';
+import 'package:finalproject/app/modules/documents/documents_module.dart';
 import 'package:flutter/material.dart';
 
 import 'person_bloc.dart';
@@ -40,8 +41,8 @@ class _PersonPageState extends State<PersonPage> {
         ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigator.of(context).push(
-          //     MaterialPageRoute(builder: (context) => EssayFormModule()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => DocumentsModule(null,() => _personBloc.findPersonDocs())));
         },
         child: Icon(Icons.add),
       ),
