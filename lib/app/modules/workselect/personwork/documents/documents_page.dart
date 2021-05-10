@@ -33,8 +33,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
   @override
   void initState() {
     super.initState();
-    _titleTextController.text = widget.personDoc.title;
-    _contentTextController.text = widget.personDoc.content;
+    _titleTextController.text =
+        widget.personDoc == null ? null : widget.personDoc.title;
+    _contentTextController.text =
+        widget.personDoc == null ? null : widget.personDoc.content;
   }
 
   @override

@@ -3,9 +3,10 @@ import 'dart:developer';
 import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
 import 'package:finalproject/app/model/personDoc.dart';
-import 'package:finalproject/app/modules/documents/documents_module.dart';
+
 import 'package:flutter/material.dart';
 
+import 'documents/documents_module.dart';
 import 'person_bloc.dart';
 import 'person_module.dart';
 
