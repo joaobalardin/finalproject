@@ -30,32 +30,35 @@ class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Chatbox"),
+      appBar: AppBar(
+        title: Text("Chatbox"),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+          child: buildList(),
         ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(top: 10, left: 10, right: 10),
-            child: buildList(),
-          ),
-        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => DocumentsModule(null,() => _personBloc.findPersonDocs())));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  DocumentsModule(null, () => _personBloc.findPersonDocs())));
         },
         child: Icon(Icons.add),
       ),
     );
   }
 
-  Widget buildCard(String texto, Function selecionaTrabalho) {
+  Widget buildCard(String texto, PersonDoc personDoc) {
     return Row(
       children: [
         Expanded(
             child: Card(
                 child: InkWell(
-                    onTap: () => selecionaTrabalho(),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DocumentsModule(
+                            personDoc, () => _personBloc.findPersonDocs()))),
                     child: Container(
                       child: Text(texto),
                       padding: EdgeInsets.all(10),
@@ -69,10 +72,9 @@ class _PersonPageState extends State<PersonPage> {
       stream: _personBloc.listDocBehaviorSubject.stream,
       builder: (context, snapshot) {
         List<PersonDoc> persondocs = snapshot.data;
-        if(persondocs == null || persondocs.isEmpty)
-          return Container();
+        if (persondocs == null || persondocs.isEmpty) return Container();
         List<Widget> widgets =
-            persondocs.map((e) => buildCard(e.title, null)).toList();
+            persondocs.map((personDoc) => buildCard(personDoc.title, personDoc)).toList();
         return Column(children: widgets);
       },
     );

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
+import 'package:finalproject/app/model/personDoc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,10 @@ class DocumentsPage extends StatefulWidget {
 
   final Function callback;
 
-  const DocumentsPage(this.callback, {Key key, this.title = "Joao"})
+  final PersonDoc personDoc;
+
+  const DocumentsPage(this.personDoc, this.callback,
+      {Key key, this.title = "Joao"})
       : super(key: key);
 
   @override
@@ -29,6 +33,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
   @override
   void initState() {
     super.initState();
+    _titleTextController.text = widget.personDoc.title;
+    _contentTextController.text = widget.personDoc.content;
   }
 
   @override
@@ -65,10 +71,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
             ),
             Container(
               child: SubmitWidget(() async {
-               await _documentsBloc.saveDocuments(
+                await _documentsBloc.saveDocuments(
                     _titleTextController.text, _contentTextController.text);
-               widget.callback();
-               Navigator.pop(context);
+                widget.callback();
+                Navigator.pop(context);
               }, text: "Concluir"),
               padding: EdgeInsets.only(bottom: 10),
             )

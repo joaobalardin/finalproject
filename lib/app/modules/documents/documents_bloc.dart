@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 
 class DocumentsBloc extends BlocBase {
   PersonDocBloc personDocBloc = new PersonDocBloc();
-  String id;
+  PersonDoc personDoc;
 
-  DocumentsBloc(this.id);
+  DocumentsBloc(this.personDoc);
 
   saveDocuments(String title, String content) async {
-    if (id == null)
+    if (personDoc == null)
       await personDocBloc.create(new PersonDoc(title: title, content: content));
     else
       await personDocBloc.update(
-          new PersonDoc(id: id, title: title, content: content));
+          new PersonDoc(id: personDoc.id, title: title, content: content));
   }
 }
