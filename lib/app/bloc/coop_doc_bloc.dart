@@ -28,8 +28,8 @@ class CoopDocBloc extends BlocBase {
     return coopDocs;
   }
 
-  Future<void> create(CoopDoc coopDoc) async {
-    await firebaseRef.add(coopDoc.toMap());
+  Future<String> create(CoopDoc coopDoc) async {
+    return (await firebaseRef.add(coopDoc.toMap())).id;
   }
 
   Future<void> update(CoopDoc coopDoc) async {

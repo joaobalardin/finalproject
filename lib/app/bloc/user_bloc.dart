@@ -40,4 +40,14 @@ class UserBloc extends BlocBase {
       }).catchError((error) => print("Failed to add user: $error"));
     }
   }
+
+  Future<User> findByUserName(String username) async {
+    log(username);
+    QuerySnapshot snapshot = await users.where("username", isEqualTo: username).get();
+    QueryDocumentSnapshot user = snapshot.docs.firstWhere(
+        (element) => element.data()["username"] == username, orElse: () {
+      throw ("Usuário não encontrado");
+    });
+    return User.fromMap(user.id, user.data());
+  }
 }

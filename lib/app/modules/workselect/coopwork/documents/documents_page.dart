@@ -65,10 +65,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
         child: FloatingActionButton(
             child: Icon(Icons.person_add),
             onPressed: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) =>
-              //         UserModule(),
-              //     ));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      UserModule(_documentsBloc.coopDoc),
+                  ));
             }),
       ),
       appBar: AppBar(

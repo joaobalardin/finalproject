@@ -1,18 +1,19 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:finalproject/app/model/coopDoc.dart';
 import 'package:flutter/material.dart';
 
 import 'user_bloc.dart';
 import 'user_page.dart';
 
 class UserModule extends ModuleWidget {
-  String coopDocumentId;
+  CoopDoc coopDoc;
 
 
-  UserModule(this.coopDocumentId);
+  UserModule(this.coopDoc);
 
   @override
   List<Bloc> get blocs => [
-        Bloc((i) => UserPageBloc(coopDocumentId)),
+        Bloc((i) => UserPageBloc(coopDoc)),
       ];
 
   @override
