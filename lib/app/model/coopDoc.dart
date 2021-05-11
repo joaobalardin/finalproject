@@ -4,14 +4,15 @@ class CoopDoc {
   String id;
   String title;
   String content;
+  List <String> users;
 
-  CoopDoc({this.id, this.title, this.content});
+  CoopDoc({this.id, this.title, this.content, this.users});
 
   static CoopDoc fromMap(String id, Map<String, dynamic> map) {
-    return new CoopDoc(id: id, content: map["content"], title: map["title"]);
+    return new CoopDoc(id: id, content: map["content"], title: map["title"], users: map["users"]);
   }
 
   Map<String, dynamic> toMap() {
-    return {"content": content, "title": title, "userId": LoggedUser().user.id};
+    return {"content": content, "title": title, "users": users};
   }
 }

@@ -10,6 +10,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserBloc extends BlocBase {
   CollectionReference users = FirebaseFirestore.instance.collection('users');
 
+  Future<User> findById(String id) async {
+    DocumentSnapshot snapshot = await users.doc(id).get();
+    return User.fromMap(snapshot.id, snapshot.data());
+  }
+
   Future<void> addUser(String username) async {
     bool jaCadastrado = false;
     QuerySnapshot snapshot = await users.get();

@@ -6,6 +6,7 @@ import 'package:finalproject/app/bloc/coop_doc_bloc.dart';
 import 'package:finalproject/app/bloc/user_bloc.dart';
 import 'package:finalproject/app/model/coopDoc.dart';
 import 'package:finalproject/app/modules/workselect/workselect_module.dart';
+import 'package:finalproject/app/utils/loggedUser.dart';
 import 'package:flutter/material.dart';
 
 class DocumentsBloc extends BlocBase {
@@ -25,7 +26,7 @@ class DocumentsBloc extends BlocBase {
 
   saveDocuments(String title, String content) async {
     if (coopDoc.id == null)
-      await coopDocBloc.create(new CoopDoc(title: title, content: content));
+      await coopDocBloc.create(new CoopDoc(title: title, content: content, users: [LoggedUser().user.id]));
     else
       await coopDocBloc
           .update(new CoopDoc(id: coopDoc.id, title: title, content: content));

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
 import 'package:finalproject/app/model/coopDoc.dart';
+import 'package:finalproject/app/modules/workselect/coopwork/documents/user/user_module.dart';
 import 'package:finalproject/app/utils/position_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
           _contentTextController.value = TextEditingValue(
             text: event.data()["content"],
             selection: TextSelection.fromPosition(
-              TextPosition(offset: event.data()["content"].length),
+              TextPosition(offset: PositionUtil.findPosition(_contentTextController.text, event.data()["content"], _contentTextController.selection.start)),
             ),
           );
       }
@@ -64,10 +65,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
         child: FloatingActionButton(
             child: Icon(Icons.person_add),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  // builder: (context) =>
-                  //     DocumentsModule(null, () => _coopBloc.findCoopDocs()))
-                  ));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //     builder: (context) =>
+              //         UserModule(),
+              //     ));
             }),
       ),
       appBar: AppBar(
