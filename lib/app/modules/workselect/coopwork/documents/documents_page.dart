@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:finalproject/app/components/submit_widget.dart';
 import 'package:finalproject/app/components/text_input_widget.dart';
 import 'package:finalproject/app/model/coopDoc.dart';
+import 'package:finalproject/app/utils/position_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -39,8 +40,18 @@ class _DocumentsPageState extends State<DocumentsPage> {
         widget.coopDoc == null ? null : widget.coopDoc.content;
     _documentsBloc.docStream.listen((event) {
       if (this.mounted) {
-          _titleTextController.text = event.data()["title"];
-          _contentTextController.text = event.data()["content"];
+          _titleTextController.value = TextEditingValue(
+            text: event.data()["title"],
+            selection: TextSelection.fromPosition(
+              TextPosition(offset: PositionUtil.findPosition(_titleTextController.text, event.data()["title"], _titleTextController.selection.start)),
+            ),
+          );
+          _contentTextController.value = TextEditingValue(
+            text: event.data()["content"],
+            selection: TextSelection.fromPosition(
+              TextPosition(offset: event.data()["content"].length),
+            ),
+          );
       }
     });
   }
@@ -73,6 +84,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
         TextField(
           onChanged: (title) {
             _documentsBloc.updateTitle(title);
+            log(""+_titleTextController.selection.start.toString());
           },
           controller: _titleTextController,
           style: TextStyle(fontSize: 25),
